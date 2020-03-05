@@ -1,10 +1,10 @@
 <template>
   <!-- App.vue -->
-  <v-app>
+  <v-app color="grey lighten-5">
     <Header></Header>
 
     <!-- Sizes your content based upon application components -->
-    <v-content>
+    <v-content class="main-tag">
       <!-- Provides the application the proper gutter -->
       <v-container fluid>
         <!-- If using vue-router -->
@@ -35,3 +35,9 @@ export default {
   })
 };
 </script>
+
+<style lang="scss" scoped>
+.main-tag {
+  background-color: #eeeeee;
+}
+</style>
