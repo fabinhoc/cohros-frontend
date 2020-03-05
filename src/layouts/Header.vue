@@ -14,7 +14,7 @@
 
         <v-toolbar-title class="ma-auto"
           ><h2 class="font-weight-light text-uppercase">
-            Schedule control
+            Scheduling control
           </h2></v-toolbar-title
         >
       </v-row>
