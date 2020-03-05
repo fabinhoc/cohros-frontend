@@ -19,14 +19,29 @@
               <v-btn :to="'/phone/' + item.Id" icon color="primary">
                 <v-icon>mdi-plus</v-icon>
               </v-btn>
+              <v-btn :to="'/client/' + item.Id" icon color="success">
+                <v-icon>mdi-pencil</v-icon>
+              </v-btn>
               <v-btn icon color="red">
-                <v-icon>mdi-delete</v-icon>
+                <v-icon @click="deleteClient(item.Id)">mdi-delete</v-icon>
               </v-btn>
             </td>
           </tr>
         </tbody>
       </template>
     </v-simple-table>
+    <v-dialog v-model="dialog" hide-overlay persistent width="300">
+      <v-card color="primary" dark>
+        <v-card-text>
+          Please wait
+          <v-progress-linear
+            indeterminate
+            color="white"
+            class="mb-0"
+          ></v-progress-linear>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
@@ -37,7 +52,8 @@ export default {
   name: "TblSchedule",
   data() {
     return {
-      clients: []
+      clients: [],
+      dialog: false
     };
   },
   methods: {
@@ -45,10 +61,25 @@ export default {
       ClientService.getAll().then(response => {
         this.clients = response.data;
       });
+    },
+    deleteClient(id) {
+      ClientService.delete(id).then(response => {
+        if (response.status == 200) {
+          this.dialog = true;
+          this.getAllClients();
+        }
+      });
     }
   },
   created() {
     this.getAllClients();
+  },
+  watch: {
+    dialog(val) {
+      if (!val) return;
+
+      setTimeout(() => (this.dialog = false), 1000);
+    }
   }
 };
 </script>
