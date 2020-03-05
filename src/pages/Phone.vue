@@ -27,6 +27,7 @@
                 }}</small>
               </v-card-title>
             </v-row>
+
             <v-divider></v-divider>
             <tbl-phone :client_id="client_id"></tbl-phone>
           </v-card-text>
